@@ -4,7 +4,7 @@ import {
   FileCheck, BarChart3, MessageSquare
 } from "lucide-react"
 
-// ─── Reusable sub-components ─────────────────────────────────────────────────
+//  Reusable sub-components 
 const SectionTitle = ({ icon: Icon, children, center = false }) => (
   <div className={`flex items-center gap-3 mb-6 ${center ? "justify-center" : ""}`}>
     {Icon && <Icon className="w-7 h-7 text-indigo-600 shrink-0" />}
@@ -32,12 +32,12 @@ const TeamCard = ({ name, role }) => (
   </div>
 )
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+//  Page 
 export default function AboutUsPage() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── Hero ───────────────────────────────────────────────────────────── */}
+      {/*  Hero  */}
       <section className="bg-gradient-to-br from-indigo-600 via-indigo-500 to-blue-500">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
           <div className="inline-flex items-center gap-2 bg-white/15 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-white/20">
@@ -53,7 +53,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* ── Who We Are ─────────────────────────────────────────────────────── */}
+      {/*  Who We Are  */}
       <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
         <SectionTitle icon={Building2}>Who We Are</SectionTitle>
         <p className="text-gray-500 leading-relaxed max-w-3xl text-lg">
@@ -63,7 +63,7 @@ export default function AboutUsPage() {
         </p>
       </section>
 
-      {/* ── Our Mission ────────────────────────────────────────────────────── */}
+      {/*  Our Mission  */}
       <section className="bg-gray-50">
         <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
           <SectionTitle icon={Target}>Our Mission</SectionTitle>
@@ -82,7 +82,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* ── What We Do ─────────────────────────────────────────────────────── */}
+      {/*  What We Do  */}
       <section className="max-w-5xl mx-auto px-6 py-16 md:py-20">
         <SectionTitle icon={Rocket}>What We Do</SectionTitle>
         <div className="grid md:grid-cols-2 gap-8">
@@ -123,7 +123,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* ── Why Choose Us ──────────────────────────────────────────────────── */}
+      {/*  Why Choose Us  */}
       <section className="bg-gray-50">
         <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
           <SectionTitle icon={Lightbulb}>Why Choose UrbanServe</SectionTitle>
@@ -138,7 +138,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* ── Trust & Safety ─────────────────────────────────────────────────── */}
+      {/*  Trust & Safety  */}
       <section className="bg-indigo-50/60">
         <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
           <SectionTitle icon={Shield}>Trust &amp; Safety</SectionTitle>
@@ -163,7 +163,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* ── Our Vision ─────────────────────────────────────────────────────── */}
+      {/*  Our Vision  */}
       <section className="max-w-5xl mx-auto px-6 py-16 md:py-20 text-center">
         <SectionTitle icon={Globe} center>Our Vision</SectionTitle>
         <p className="text-xl md:text-2xl text-gray-500 leading-relaxed max-w-3xl mx-auto font-medium">
@@ -172,7 +172,7 @@ export default function AboutUsPage() {
         </p>
       </section>
 
-      {/* ── Our Team ───────────────────────────────────────────────────────── */}
+      {/*  Our Team  */}
       <section className="bg-gray-50">
         <div className="max-w-5xl mx-auto px-6 py-16 md:py-20">
           <SectionTitle icon={Users}>Our Team</SectionTitle>
@@ -188,7 +188,7 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* ── Contact ────────────────────────────────────────────────────────── */}
+      {/*  Contact  */}
       <section className="max-w-5xl mx-auto px-6 py-16 md:py-20 text-center">
         <SectionTitle icon={Mail} center>Contact Us</SectionTitle>
         <p className="text-gray-500 text-lg mb-6">Have questions or need support? We'd love to hear from you.</p>

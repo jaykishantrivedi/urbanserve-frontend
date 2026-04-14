@@ -3,26 +3,26 @@ import { motion } from "framer-motion"
 import { FileText, Mail } from "lucide-react"
 
 const sections = [
-  { id: "introduction",  number: 1,  title: "Introduction" },
-  { id: "about",         number: 2,  title: "About UrbanServe" },
-  { id: "eligibility",   number: 3,  title: "Eligibility" },
-  { id: "accounts",      number: 4,  title: "User Accounts" },
-  { id: "providers",     number: 5,  title: "Service Providers" },
-  { id: "bookings",      number: 6,  title: "Bookings" },
-  { id: "payments",      number: 7,  title: "Payments" },
-  { id: "cancellations", number: 8,  title: "Cancellations & Refunds" },
-  { id: "reviews",       number: 9,  title: "Reviews & Feedback" },
-  { id: "prohibited",    number: 10, title: "Prohibited Activities" },
+  { id: "introduction", number: 1, title: "Introduction" },
+  { id: "about", number: 2, title: "About UrbanServe" },
+  { id: "eligibility", number: 3, title: "Eligibility" },
+  { id: "accounts", number: 4, title: "User Accounts" },
+  { id: "providers", number: 5, title: "Service Providers" },
+  { id: "bookings", number: 6, title: "Bookings" },
+  { id: "payments", number: 7, title: "Payments" },
+  { id: "cancellations", number: 8, title: "Cancellations & Refunds" },
+  { id: "reviews", number: 9, title: "Reviews & Feedback" },
+  { id: "prohibited", number: 10, title: "Prohibited Activities" },
   { id: "notifications", number: 11, title: "Notifications" },
-  { id: "ip",            number: 12, title: "Intellectual Property" },
-  { id: "liability",     number: 13, title: "Limitation of Liability" },
-  { id: "disclaimer",    number: 14, title: "Disclaimer" },
-  { id: "suspension",    number: 15, title: "Account Suspension & Termination" },
+  { id: "ip", number: 12, title: "Intellectual Property" },
+  { id: "liability", number: 13, title: "Limitation of Liability" },
+  { id: "disclaimer", number: 14, title: "Disclaimer" },
+  { id: "suspension", number: 15, title: "Account Suspension & Termination" },
   { id: "modifications", number: 16, title: "Modifications to Terms" },
-  { id: "third-party",   number: 17, title: "Third-Party Services" },
-  { id: "privacy",       number: 18, title: "Privacy" },
+  { id: "third-party", number: 17, title: "Third-Party Services" },
+  { id: "privacy", number: 18, title: "Privacy" },
   { id: "governing-law", number: 19, title: "Governing Law" },
-  { id: "contact",       number: 20, title: "Contact Us" },
+  { id: "contact", number: 20, title: "Contact Us" },
 ]
 
 const SectionHeading = ({ id, number, title }) => (
@@ -101,11 +101,10 @@ export default function TermsAndConditionsPage() {
                 <li key={id}>
                   <a
                     href={`#${id}`}
-                    className={`block text-sm py-1.5 px-3 rounded-md transition-colors ${
-                      activeSection === id
+                    className={`block text-sm py-1.5 px-3 rounded-md transition-colors ${activeSection === id
                         ? "bg-indigo-50 text-indigo-700 font-medium"
                         : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                    }`}
+                      }`}
                   >
                     {number}. {title}
                   </a>

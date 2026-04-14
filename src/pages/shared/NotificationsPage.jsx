@@ -36,7 +36,7 @@ export default function NotificationsPage() {
         } else if (role === 'user') {
             switch(notification.type) {
                 case 'QUOTE_RECEIVED':
-                    navigate(`/user/requests/${notification.relatedId}`); // Assuming relatedId holds the serviceRequestId
+                    navigate(`/user/requests/${notification.relatedId}`); 
                     break;
                 case 'REQUEST_EXPIRED':
                     navigate('/user/requests');
@@ -73,7 +73,7 @@ export default function NotificationsPage() {
     if (isLoading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-16">
-                <span className="animate-spin text-4xl text-blue-500">🌀</span>
+                <span className="animate-spin text-4xl text-blue-500"></span>
             </div>
         );
     }

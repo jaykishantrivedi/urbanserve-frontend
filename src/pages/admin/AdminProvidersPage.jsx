@@ -15,17 +15,16 @@ import ProvidersTable from "./providers/ProvidersTable"
 
 const ITEMS_PER_PAGE = 10
 
-// ── Main Page ──────────────────────────────────────────────────────────
+//  Main Page 
 export function AdminProvidersPage() {
     const navigate = useNavigate()
 
-    const [search, setSearch]             = useState("")
+    const [search, setSearch] = useState("")
     const [debouncedSearch, setDebounced] = useState("")
-    const [statusFilter, setStatus]       = useState("all")
-    const [page, setPage]                 = useState(1)
-    const [loadingId, setLoadingId]       = useState(null)
+    const [statusFilter, setStatus] = useState("all")
+    const [page, setPage] = useState(1)
+    const [loadingId, setLoadingId] = useState(null)
 
-    // 350ms debounce
     useEffect(() => {
         const t = setTimeout(() => setDebounced(search), 350)
         return () => clearTimeout(t)
@@ -40,25 +39,25 @@ export function AdminProvidersPage() {
         status: statusFilter,
     })
 
-    const [approveProvider]      = useApproveProviderMutation()
-    const [toggleProviderBlock]  = useToggleProviderBlockMutation()
-    const [deleteProvider]       = useDeleteProviderMutation()
+    const [approveProvider] = useApproveProviderMutation()
+    const [toggleProviderBlock] = useToggleProviderBlockMutation()
+    const [deleteProvider] = useDeleteProviderMutation()
 
-    const providers  = data?.providers  || []
+    const providers = data?.providers || []
     const pagination = data?.pagination || { total: 0, totalPages: 1 }
-    const kpis       = data?.kpis       || {}
+    const kpis = data?.kpis || {}
 
     const { total, totalPages } = pagination
     const startIndex = (page - 1) * ITEMS_PER_PAGE + 1
-    const endIndex   = Math.min(page * ITEMS_PER_PAGE, total)
+    const endIndex = Math.min(page * ITEMS_PER_PAGE, total)
 
     const handleAction = async (action, providerId) => {
         setLoadingId(providerId)
         try {
             let res
             if (action === "approve") res = await approveProvider(providerId).unwrap()
-            if (action === "block")   res = await toggleProviderBlock(providerId).unwrap()
-            if (action === "delete")  res = await deleteProvider(providerId).unwrap()
+            if (action === "block") res = await toggleProviderBlock(providerId).unwrap()
+            if (action === "delete") res = await deleteProvider(providerId).unwrap()
             toast.success(res?.message || "Action successful")
         } catch {
             toast.error("Action failed. Please try again.")

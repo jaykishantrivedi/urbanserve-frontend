@@ -6,7 +6,7 @@ export default function ProviderDetailsServicesSection({ provider, services, isS
       <h2 className="text-xl font-bold text-foreground mb-4 pb-4 border-b border-(--color-border)">Provided Services</h2>
       {isServicesLoading ? (
         <div className="flex justify-center py-12">
-          <span className="animate-spin text-4xl text-(--color-primary)">🌀</span>
+          <span className="animate-spin text-4xl text-(--color-primary)"></span>
         </div>
       ) : services.length > 0 ? (
         <div className="space-y-5">

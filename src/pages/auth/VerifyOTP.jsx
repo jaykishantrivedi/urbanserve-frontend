@@ -19,7 +19,6 @@ const VerifyOTP = () => {
 
     const inputsRef = useRef([])
 
-    // CountDown for resend OTP
     useEffect(()=>{
         if(timer<=0) return
 
@@ -36,7 +35,6 @@ const VerifyOTP = () => {
         return() => clearInterval(interval)
     },[timer])
 
-    // Handle OTP input change
     const handleChange = (e, index) => {
         const val = e.target.value.replace(/[^0-9]/g, "")
         if(!val) return
@@ -45,11 +43,9 @@ const VerifyOTP = () => {
         newOtp[index] = val
         setOtp(newOtp)
 
-        // Move focus to next Index
         if(index<5) inputsRef.current[index+1].focus()
     }
 
-    // Handle backSpace
     const handleKeyDown = (e, index) => {
         if(e.key === "Backspace"){
             const newOtp = [...otp]
@@ -64,7 +60,6 @@ const VerifyOTP = () => {
         }
     }
 
-    // Verify OTP
     const handleVerify = async () => {
         const code = otp.join("")
         if(code.length < 6){
@@ -83,7 +78,6 @@ const VerifyOTP = () => {
     }
     }
 
-    // Resend OTP
     const handleResend = async() => {
         try {
             await resendOtp({email:tempEmail}).unwrap()

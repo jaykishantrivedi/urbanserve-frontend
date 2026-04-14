@@ -23,7 +23,7 @@ const useTokenRefresh = () => {
     // Tracks when we last successfully refreshed (or mounted)
     const lastRefreshedAtRef = useRef(Date.now())
 
-    // ─── Core refresh function ────────────────────────────────────────────────
+    //  Core refresh function 
     const refreshToken = useCallback(async () => {
         if (isRefreshingRef.current) return
         isRefreshingRef.current = true
@@ -41,7 +41,7 @@ const useTokenRefresh = () => {
                 await persistor.purge()
             } else {
                 lastRefreshedAtRef.current = Date.now()
-                console.log("[TokenRefresh] Access token refreshed ✅")
+                console.log("[TokenRefresh] Access token refreshed ")
             }
         } catch (err) {
             console.error("[TokenRefresh] Network error during refresh:", err)
@@ -51,7 +51,7 @@ const useTokenRefresh = () => {
         }
     }, [dispatch])
 
-    // ─── Scheduled proactive refresh ─────────────────────────────────────────
+    //  Scheduled proactive refresh 
     useEffect(() => {
         if (!isLoggedIn) {
             // Clear any existing interval when the user logs out
@@ -75,7 +75,7 @@ const useTokenRefresh = () => {
         }
     }, [isLoggedIn, refreshToken])
 
-    // ─── Tab-focus / visibility refresh ──────────────────────────────────────
+    //  Tab-focus / visibility refresh 
     useEffect(() => {
         if (!isLoggedIn) return
 

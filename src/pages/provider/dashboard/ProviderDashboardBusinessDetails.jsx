@@ -30,7 +30,7 @@ export default function ProviderDashboardBusinessDetails({ profile }) {
             Status
           </p>
           <p className="font-medium text-sm text-[var(--color-foreground)] dark:text-[var(--color-foreground-dark)]">
-            {profile.isAvailable ? '✅ Available for Requests' : '🔴 Not Available'}
+            {profile.isAvailable ? ' Available for Requests' : ' Not Available'}
           </p>
         </div>
       </div>

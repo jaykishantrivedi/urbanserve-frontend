@@ -8,13 +8,13 @@ import { AddCategoryImageSection } from "./addCategory/AddCategoryImageSection"
 import { AddCategoryPageHeader } from "./addCategory/AddCategoryPageHeader"
 import { AddCategoryStatusSection } from "./addCategory/AddCategoryStatusSection"
 
-// ── Shared styles ───────────────────────────────────────────────────────
+//  Shared styles 
 const inputClass = (hasErr) =>
     `w-full px-4 py-2.5 text-sm border ${
         hasErr ? "border-red-400 bg-red-50" : "border-gray-200 bg-gray-50 hover:bg-gray-100"
     } rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-colors`
 
-// ── Main Page ──────────────────────────────────────────────────────────
+//  Main Page 
 export function AdminAddCategoryPage() {
     const navigate = useNavigate()
 
@@ -30,7 +30,6 @@ export function AdminAddCategoryPage() {
     const [categoryImage, setCategoryImage]           = useState(null)
     const [errors, setErrors]                         = useState({})
 
-    // Auto-generate slug
     useEffect(() => {
         if (formData.categoryName && !slugManuallyEdited) {
             const generatedSlug = formData.categoryName
@@ -43,14 +42,12 @@ export function AdminAddCategoryPage() {
         }
     }, [formData.categoryName, slugManuallyEdited])
 
-    // Cleanup object URL
     useEffect(() => {
         return () => {
             if (categoryImage?.preview) URL.revokeObjectURL(categoryImage.preview)
         }
     }, [categoryImage])
 
-    // Handlers
     const handleInput = (e) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
@@ -66,7 +63,6 @@ export function AdminAddCategoryPage() {
     const handleImageUpload = (e) => {
         const file = e.target.files?.[0]
         if (file) {
-            // Validate size (max 2MB)
             if (file.size > 2 * 1024 * 1024) {
                 toast.error("Image must be smaller than 2MB")
                 return

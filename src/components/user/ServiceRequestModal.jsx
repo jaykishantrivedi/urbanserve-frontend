@@ -26,13 +26,11 @@ const ServiceRequestModal = ({ isOpen, onClose, serviceId, providerId = null, se
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // 1. Create Request
             const reqRes = await createRequest({
                 service: serviceId,
                 ...formData
             }).unwrap();
 
-            // 2. Dispatch/Broadcast Request 
             const requestId = reqRes.serviceRequest._id;
             await sendToProviders({ requestId, providerId }).unwrap();
 
@@ -44,7 +42,6 @@ const ServiceRequestModal = ({ isOpen, onClose, serviceId, providerId = null, se
         }
     };
 
-    // Auto-calculate min date (today)
     const today = new Date().toISOString().split('T')[0];
 
     return (

@@ -9,14 +9,12 @@ import { ProviderDetailProfileSection } from "./providerDetailModal/ProviderDeta
 export function ProviderDetailModal({ providerId, open, onClose, onApprove, onReject, processing }) {
     const { data, isLoading } = useGetAdminProviderByIdQuery(providerId, { skip: !open || !providerId })
 
-    // Close on Escape
     useEffect(() => {
         const handler = (e) => { if (e.key === "Escape") onClose() }
         if (open) document.addEventListener("keydown", handler)
         return () => document.removeEventListener("keydown", handler)
     }, [open, onClose])
 
-    // Lock body scroll when open
     useEffect(() => {
         document.body.style.overflow = open ? "hidden" : ""
         return () => { document.body.style.overflow = "" }

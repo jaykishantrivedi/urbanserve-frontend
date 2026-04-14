@@ -31,7 +31,7 @@ export const adminDashboardApi = createApi({
             query: () => "/admin/dashboard/category-popularity",
             providesTags: ["AdminDashboard"],
         }),
-        // ── User Management ──────────────────────────────────────────────
+        //  User Management 
         getAdminUsers: builder.query({
             query: ({ page = 1, limit = 10, search = "", status = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, status })
@@ -50,7 +50,7 @@ export const adminDashboardApi = createApi({
             query: (userId) => `/admin/dashboard/users/${userId}`,
             providesTags: (result, error, userId) => [{ type: "AdminUsers", id: userId }],
         }),
-        // ── Provider Management ──────────────────────────────────────────
+        //  Provider Management 
         getAdminProviders: builder.query({
             query: ({ page = 1, limit = 10, search = "", status = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, status })
@@ -82,7 +82,7 @@ export const adminDashboardApi = createApi({
             query: (providerId) => `/admin/dashboard/providers/${providerId}/services`,
             providesTags: (result, error, id) => [{ type: "AdminProviders", id }],
         }),
-        // ── Service Management ────────────────────────────────────────────
+        //  Service Management 
         getAdminServices: builder.query({
             query: ({ page = 1, limit = 10, search = "", status = "all", category = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, status, category })
@@ -113,7 +113,6 @@ export const adminDashboardApi = createApi({
             }),
             invalidatesTags: ["AdminServices"],
         }),
-        // Get single service by ID
         getAdminServiceById: builder.query({
             query: (serviceId) => `/admin/dashboard/services/${serviceId}`,
             providesTags: (result, error, id) => [{ type: "AdminServices", id }],
@@ -127,7 +126,7 @@ export const adminDashboardApi = createApi({
             }),
             invalidatesTags: ["AdminServices"],
         }),
-        // ── Category Management ────────────────────────────────────────────
+        //  Category Management 
         getAdminCategories: builder.query({
             query: ({ page = 1, limit = 10, search = "", status = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, status })
@@ -165,7 +164,7 @@ export const adminDashboardApi = createApi({
             query: (categoryId) => ({ url: `/admin/dashboard/categories/${categoryId}`, method: "DELETE" }),
             invalidatesTags: ["AdminCategories"],
         }),
-        // ── Booking Management ────────────────────────────────────────────
+        //  Booking Management 
         getAdminBookings: builder.query({
             query: ({ page = 1, limit = 10, search = "", status = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, status })
@@ -185,7 +184,7 @@ export const adminDashboardApi = createApi({
             query: (bookingId) => ({ url: `/admin/dashboard/bookings/${bookingId}/complete`, method: "PATCH" }),
             invalidatesTags: ["AdminBookings"],
         }),
-        // ── Payment Management ────────────────────────────────────────────
+        //  Payment Management 
         getAdminPayments: builder.query({
             query: ({ page = 1, limit = 10, search = "", status = "all", method = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, status, method })
@@ -201,7 +200,7 @@ export const adminDashboardApi = createApi({
             query: (paymentId) => ({ url: `/admin/dashboard/payments/${paymentId}/fail`, method: "PATCH" }),
             invalidatesTags: ["AdminPayments"],
         }),
-        // ── Review Management ─────────────────────────────────────────────
+        //  Review Management 
         getAdminReviews: builder.query({
             query: ({ page = 1, limit = 10, search = "", rating = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, rating })
@@ -213,7 +212,7 @@ export const adminDashboardApi = createApi({
             query: (reviewId) => ({ url: `/admin/dashboard/reviews/${reviewId}`, method: "DELETE" }),
             invalidatesTags: ["AdminReviews", "AdminDashboard"], // Deleting a review might impact global metrics
         }),
-        // ── Notification Management ───────────────────────────────────────
+        //  Notification Management 
         getAdminNotifications: builder.query({
             query: ({ page = 1, limit = 10, search = "", type = "all", status = "all" } = {}) => {
                 const params = new URLSearchParams({ page, limit, search, type, status })
@@ -229,7 +228,7 @@ export const adminDashboardApi = createApi({
             query: (notificationId) => ({ url: `/admin/dashboard/notifications/${notificationId}`, method: "DELETE" }),
             invalidatesTags: ["AdminNotifications", "AdminDashboard"],
         }),
-        // ── Settings Management ───────────────────────────────────────────
+        //  Settings Management 
         getAdminSettings: builder.query({
             query: () => "/admin-settings",
             providesTags: ["AdminSettings"],
@@ -242,7 +241,7 @@ export const adminDashboardApi = createApi({
             }),
             invalidatesTags: ["AdminSettings"],
         }),
-        // ── Admin Alert Management (bell icon) ───────────────────────────
+        //  Admin Alert Management (bell icon) 
         getAdminAlerts: builder.query({
             query: () => "/admin/dashboard/alerts",
             providesTags: ["AdminAlerts"],

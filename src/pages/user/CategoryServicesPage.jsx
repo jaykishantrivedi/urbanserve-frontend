@@ -6,7 +6,7 @@ import { getCategoryStyle } from './categories/categoryStyles'
 import CategoryServicesHeader from './categoryServices/CategoryServicesHeader'
 import CategoryServicesGridSection from './categoryServices/CategoryServicesGridSection'
 
-// ── CategoryServicesPage ───────────────────────────────────────────
+//  CategoryServicesPage 
 const CategoryServicesPage = () => {
   const { city, categorySlug } = useParams()
   const navigate               = useNavigate()

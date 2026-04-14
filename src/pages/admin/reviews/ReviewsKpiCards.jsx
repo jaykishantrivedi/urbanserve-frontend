@@ -13,7 +13,7 @@ export default function ReviewsKpiCards({ isLoading, kpis }) {
       />
       <KPICard
         title="Average Rating"
-        value={isLoading ? "—" : `${kpis.averageRating ?? "0.0"} ★`}
+        value={isLoading ? "—" : `${kpis.averageRating ?? "0.0"} `}
         icon={Star}
         iconColor="text-yellow-600"
         iconBgColor="bg-yellow-50"

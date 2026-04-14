@@ -15,7 +15,7 @@ import ServicesTable from "./services/ServicesTable"
 
 const ITEMS_PER_PAGE = 10
 
-// ── Main Page ──────────────────────────────────────────────────────────
+//  Main Page 
 export function AdminServicesPage() {
     const navigate = useNavigate()
 
@@ -26,7 +26,6 @@ export function AdminServicesPage() {
     const [page, setPage]               = useState(1)
     const [loadingId, setLoadingId]     = useState(null)
 
-    // 350 ms debounce on search
     useEffect(() => {
         const t = setTimeout(() => setDebounced(search), 350)
         return () => clearTimeout(t)

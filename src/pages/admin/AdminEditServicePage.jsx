@@ -14,13 +14,13 @@ import { EditServiceLoadingState } from "./editService/EditServiceLoadingState"
 import { EditServicePageHeader } from "./editService/EditServicePageHeader"
 import { EditServiceStatusSection } from "./editService/EditServiceStatusSection"
 
-// ── Shared input styles ────────────────────────────────────────────────
+//  Shared input styles 
 const inputClass = (hasErr) =>
     `w-full px-4 py-2.5 text-sm border ${
         hasErr ? "border-red-400 bg-red-50" : "border-gray-200 bg-gray-50"
     } rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent placeholder-gray-400 transition-colors`
 
-// ── Main page ──────────────────────────────────────────────────────────
+//  Main page 
 export function AdminEditServicePage() {
     const { serviceId } = useParams()
     const navigate      = useNavigate()
@@ -29,10 +29,8 @@ export function AdminEditServicePage() {
     const [errors, setErrors]       = useState({})
     const [submitting, setSubmitting] = useState(false)
 
-    // Fetch existing service data
     const { data: svcData, isLoading: svcLoading, isError } = useGetAdminServiceByIdQuery(serviceId)
 
-    // Fetch categories
     const { data: catData, isLoading: catsLoading } = useGetAdminServiceCategoriesQuery()
     const categories = catData?.categories || []
 
@@ -51,14 +49,14 @@ export function AdminEditServicePage() {
         }
     }, [svcData])
 
-    // ── Handlers ──────────────────────────────────────────────────────
+    //  Handlers 
     const handle = (e) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
         if (errors[name]) setErrors(prev => ({ ...prev, [name]: "" }))
     }
 
-    // ── Validate ──────────────────────────────────────────────────────
+    //  Validate 
     const validate = () => {
         const e = {}
         if (!formData.serviceName.trim()) e.serviceName = "Service name is required"
@@ -68,7 +66,7 @@ export function AdminEditServicePage() {
         return Object.keys(e).length === 0
     }
 
-    // ── Submit ────────────────────────────────────────────────────────
+    //  Submit 
     const handleSubmit = async (ev) => {
         ev.preventDefault()
         if (!validate()) return
@@ -96,13 +94,12 @@ export function AdminEditServicePage() {
         navigate("/admin/services")
     }
 
-    // ── Loading state ─────────────────────────────────────────────────
+    //  Loading state 
     if (svcLoading) return <EditServiceLoadingState />
 
-    // ── Error / not found ─────────────────────────────────────────────
+    //  Error / not found 
     if (isError || !svcData?.service) return <EditServiceErrorState onBack={() => navigate("/admin/services")} />
 
-    // Wait until form is seeded
     if (!formData) return null
 
     return (

@@ -6,7 +6,6 @@ export const searchApi = createApi({
     baseQuery: baseQueryWithReauth,
     endpoints: (builder) => ({
 
-        // Combined provider search
         searchProviders: builder.query({
             query: ({ service, city, minPrice, maxPrice, priceType, minRating, experience, sort }) => {
                 const params = new URLSearchParams()
@@ -22,7 +21,6 @@ export const searchApi = createApi({
             }
         }),
 
-        // City autocomplete
         searchCities: builder.query({
             query: (q) => `/search/cities?q=${encodeURIComponent(q)}`
         }),

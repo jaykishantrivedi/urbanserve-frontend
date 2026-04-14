@@ -9,7 +9,7 @@ export default function UserProviderStartOtpModal({ otpModal, onClose }) {
         <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-5">
           <Key size={28} className="text-indigo-600" />
         </div>
-        <h2 className="text-2xl font-extrabold text-gray-900 mb-2">Booking Confirmed! 🎉</h2>
+        <h2 className="text-2xl font-extrabold text-gray-900 mb-2">Booking Confirmed! </h2>
         <p className="text-gray-500 text-sm mb-5">
           Save your Service Start OTP - share this with the provider when they arrive to start the service.
         </p>

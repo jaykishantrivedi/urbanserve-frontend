@@ -17,12 +17,12 @@ export function AdminDashboard() {
     const [bookingVariant, setBookingVariant] = useState("currentMonth")
     const [revenueVariant, setRevenueVariant] = useState("currentMonth")
 
-    const { data: kpiData, isLoading: kpiLoading }                 = useGetDashboardKPIsQuery()
-    const { data: bookingTrends, isLoading: btLoading }            = useGetBookingTrendsQuery(bookingVariant)
-    const { data: revenueTrends, isLoading: rtLoading }            = useGetRevenueTrendsQuery(revenueVariant)
-    const { data: providerStatus, isLoading: psLoading }           = useGetProviderStatusDistributionQuery()
-    const { data: bookingStatus, isLoading: bsLoading }            = useGetBookingStatusDistributionQuery()
-    const { data: categoryData, isLoading: catLoading }            = useGetCategoryPopularityQuery()
+    const { data: kpiData, isLoading: kpiLoading } = useGetDashboardKPIsQuery()
+    const { data: bookingTrends, isLoading: btLoading } = useGetBookingTrendsQuery(bookingVariant)
+    const { data: revenueTrends, isLoading: rtLoading } = useGetRevenueTrendsQuery(revenueVariant)
+    const { data: providerStatus, isLoading: psLoading } = useGetProviderStatusDistributionQuery()
+    const { data: bookingStatus, isLoading: bsLoading } = useGetBookingStatusDistributionQuery()
+    const { data: categoryData, isLoading: catLoading } = useGetCategoryPopularityQuery()
 
     const k = kpiData?.kpis
 

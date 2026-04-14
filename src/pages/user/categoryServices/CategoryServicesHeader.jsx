@@ -38,7 +38,7 @@ export default function CategoryServicesHeader({
 
           <div className="flex-1">
             <span className={`inline-flex items-center gap-1.5 px-3 py-1 ${light} ${text} text-xs font-semibold rounded-full mb-3`}>
-              📍 {activeCity}
+               {activeCity}
             </span>
 
             {isCategoryLoading ? (

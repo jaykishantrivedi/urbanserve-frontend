@@ -8,7 +8,7 @@ import ForProvidersRequirementsSection from './forProviders/ForProvidersRequirem
 import ForProvidersFaqSection from './forProviders/ForProvidersFaqSection'
 import ForProvidersFinalCtaSection from './forProviders/ForProvidersFinalCtaSection'
 
-// ─── Page ──────────────────────────────────────────────────────────────────────
+//  ForProvidersPage 
 export default function ForProvidersPage() {
   const navigate = useNavigate()
   const { userData } = useSelector((state) => state.auth)

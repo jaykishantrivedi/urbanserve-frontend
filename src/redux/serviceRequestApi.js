@@ -26,7 +26,6 @@ export const serviceRequestApi = createApi({
             invalidatesTags: ['ServiceRequest']
         }),
 
-        // Correct URL matching backend route
         getUserRequests: builder.query({
             query: () => "/service-requests/getAllServiceRequest",
             providesTags: ['ServiceRequest']

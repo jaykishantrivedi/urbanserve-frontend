@@ -19,10 +19,6 @@ export const authSlice = createSlice({
         logout : (state) => {
             state.userData = null
         }
-//         logout: (state) => {
-//     console.log("5. Reducer called, clearing userData")
-//     state.userData = null
-// }
     }
 })
 

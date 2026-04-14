@@ -177,7 +177,7 @@ const SignUp = () => {
                         ${acceptedTerms ? "bg-indigo-600 border-indigo-600" : "bg-white border-gray-300"}`}
                         >
                             {acceptedTerms && (
-                                <span className="text-white text-xs font-bold">✓</span>
+                                <span className="text-white text-xs font-bold"></span>
                             )}
                         </div>
                     <span className="text-sm text-gray-400 font-medium leading-snug">

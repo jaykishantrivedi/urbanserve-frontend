@@ -21,7 +21,7 @@ const dropdownItems = [
   { icon: CreditCard,    label: 'My Payments', path: '/payments' },
 ]
 
-// ── Avatar ─────────────────────────────────────────────────────────
+//  Avatar 
 const Avatar = ({ pfpUrl, name, size = "md" }) => {
   const sizes = { sm: "w-8 h-8 text-xs", md: "w-9 h-9 text-sm" }
 
@@ -44,7 +44,7 @@ const Avatar = ({ pfpUrl, name, size = "md" }) => {
   )
 }
 
-// ── Navbar ─────────────────────────────────────────────────────────
+//  Navbar 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen]         = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -82,7 +82,6 @@ const Navbar = () => {
 
   const [logoutApi] = useLogoutMutation()
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -101,7 +100,6 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false)
     setIsDropdownOpen(false)
@@ -132,7 +130,7 @@ const Navbar = () => {
     return `/${user?.role || 'user'}${path}`
   }
 
-  // ── Dropdown Menu ──────────────────────────────────────────────
+  //  Dropdown Menu 
   const DropdownMenu = () => {
     // Admins only see My Profile — not Bookings, Requests, Payments
     const visibleItems = user?.role === 'admin'
@@ -173,7 +171,7 @@ const Navbar = () => {
     )
   }
 
-  // ── Auth Section (shared between home and slim) ────────────────
+  //  Auth Section (shared between home and slim) 
   const AuthSection = ({ size = "md" }) => (
     userData ? (
       <div className="flex items-center gap-4">
@@ -265,7 +263,7 @@ const Navbar = () => {
             UrbanServe
           </a>
 
-          {/* ── HOME navbar ─────────────────────────────────────── */}
+          {/*  HOME navbar  */}
           {isHome && (
             <>
               {/* Desktop nav links */}
@@ -316,7 +314,7 @@ const Navbar = () => {
             </>
           )}
 
-          {/* ── SLIM navbar (all other pages) ───────────────────── */}
+          {/*  SLIM navbar (all other pages)  */}
           {!isHome && (
             <div className="flex items-center gap-3">
               <AuthSection />
@@ -325,7 +323,7 @@ const Navbar = () => {
 
         </div>
 
-        {/* Mobile Nav Links — home only ─────────────────────────── */}
+        {/* Mobile Nav Links — home only  */}
         {isHome && isMenuOpen && (
           <div className="md:hidden py-4 space-y-1 border-t border-gray-200">
             {navLinks.map((link) => (

@@ -1,21 +1,7 @@
-// ── Cloudinary Direct Upload Utility ──────────────────────────────
-//
-// Setup in Cloudinary Dashboard:
-//  1. Settings → Upload → Upload Presets → Add upload preset
-//  2. Set Signing mode: "Unsigned"
-//  3. Optional: Set folder, allowed formats (jpg, png, webp)
-//  4. Copy preset name → VITE_CLOUDINARY_UPLOAD_PRESET
-//  5. Copy cloud name  → VITE_CLOUDINARY_CLOUD_NAME
-//
-// .env variables needed:
-//   VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
-//   VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
-
-const CLOUD_NAME    = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
-const UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
-// ── Validate env vars on import ────────────────────────────────────
 if (!CLOUD_NAME || !UPLOAD_PRESET) {
   console.warn(
     "[Cloudinary] Missing env vars.\n" +
@@ -38,23 +24,21 @@ export const uploadToCloudinary = (file, folder = "UrbanServe", onProgress) => {
   return new Promise((resolve, reject) => {
     if (!file) { reject(new Error("No file provided")); return; }
 
-    // Validate file type
     const ALLOWED = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
     if (!ALLOWED.includes(file.type)) {
       reject(new Error(`File type "${file.type}" is not allowed. Use JPG, PNG, or WebP.`));
       return;
     }
 
-    // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       reject(new Error("File size exceeds 5 MB. Please compress the image."));
       return;
     }
 
     const formData = new FormData();
-    formData.append("file",           file);
-    formData.append("upload_preset",  UPLOAD_PRESET);
-    formData.append("folder",         folder);
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    formData.append("folder", folder);
 
     // Use XMLHttpRequest for upload progress tracking
     const xhr = new XMLHttpRequest();
@@ -83,8 +67,8 @@ export const uploadToCloudinary = (file, folder = "UrbanServe", onProgress) => {
       }
     });
 
-    xhr.addEventListener("error",  () => reject(new Error("Network error during upload")));
-    xhr.addEventListener("abort",  () => reject(new Error("Upload was cancelled")));
+    xhr.addEventListener("error", () => reject(new Error("Network error during upload")));
+    xhr.addEventListener("abort", () => reject(new Error("Upload was cancelled")));
 
     xhr.open("POST", UPLOAD_URL);
     xhr.send(formData);

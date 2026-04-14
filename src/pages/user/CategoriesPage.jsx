@@ -5,7 +5,7 @@ import { useGetAllCategoriesQuery } from '../../redux/categoryApi'
 import CategoriesHeader from './categories/CategoriesHeader'
 import CategoriesGridSection from './categories/CategoriesGridSection'
 
-// ── CategoriesPage ─────────────────────────────────────────────────
+//  CategoriesPage 
 const CategoriesPage = () => {
   const navigate     = useNavigate()
   const selectedCity = useSelector((state) => state.city.selectedCity)

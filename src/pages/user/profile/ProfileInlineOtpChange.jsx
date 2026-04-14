@@ -31,7 +31,6 @@ export default function ProfileInlineOtpChange({
             await onSendOtp(payload)
             setStep("enterOtp")
         } catch {
-            // Parent handles toast messaging.
         }
     }
 
@@ -47,7 +46,6 @@ export default function ProfileInlineOtpChange({
             setNewValue("")
             setOtp("")
         } catch {
-            // Parent handles toast messaging.
         }
     }
 

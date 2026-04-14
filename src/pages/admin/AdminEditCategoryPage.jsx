@@ -13,13 +13,13 @@ import { EditCategoryLoadingState } from "./editCategory/EditCategoryLoadingStat
 import { EditCategoryPageHeader } from "./editCategory/EditCategoryPageHeader"
 import { EditCategoryStatusSection } from "./editCategory/EditCategoryStatusSection"
 
-// ── Shared styles ───────────────────────────────────────────────────────
+//  Shared styles 
 const inputClass = (hasErr) =>
     `w-full px-4 py-2.5 text-sm border ${
         hasErr ? "border-red-400 bg-red-50" : "border-gray-200 bg-gray-50 hover:bg-gray-100"
     } rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-colors`
 
-// ── Main Page ──────────────────────────────────────────────────────────
+//  Main Page 
 export function AdminEditCategoryPage() {
     const { categoryId } = useParams()
     const navigate = useNavigate()
@@ -44,14 +44,12 @@ export function AdminEditCategoryPage() {
         }
     }, [catData])
 
-    // Cleanup object URL
     useEffect(() => {
         return () => {
             if (categoryImage?.preview) URL.revokeObjectURL(categoryImage.preview)
         }
     }, [categoryImage])
 
-    // Handlers
     const handleInput = (e) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
@@ -107,10 +105,8 @@ export function AdminEditCategoryPage() {
         navigate("/admin/categories")
     }
 
-    // Loading State
     if (catLoading) return <EditCategoryLoadingState />
 
-    // Error State
     if (isError || !catData?.category) return <EditCategoryErrorState onBack={() => navigate("/admin/categories")} />
 
     if (!formData) return null

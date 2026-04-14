@@ -82,7 +82,7 @@ export default function ChangePasswordSection({
             <p className="text-xs text-red-600 font-medium mt-1">Passwords do not match</p>
           )}
           {newPassword && confirmPassword && newPassword === confirmPassword && (
-            <p className="text-xs text-green-600 font-medium mt-1">Passwords match ✓</p>
+            <p className="text-xs text-green-600 font-medium mt-1">Passwords match </p>
           )}
         </div>
       </div>

@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
 export const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
 
-    // 🔥 If token expired (and this is not the refresh call itself)
+    //  If token expired (and this is not the refresh call itself)
     if (result?.error?.status === 401 && args.url !== "/auth/refresh-token") {
 
         console.log("[baseQuery] Access token expired → refreshing...");
@@ -24,14 +24,14 @@ export const baseQueryWithReauth = async (args, api, extraOptions) => {
         );
 
         if (refreshResult?.data) {
-            console.log("[baseQuery] Token refreshed ✅ — retrying original request");
+            console.log("[baseQuery] Token refreshed  — retrying original request");
 
-            // 🔁 Retry original request (cookie is now updated by the server)
+            //  Retry original request (cookie is now updated by the server)
             result = await baseQuery(args, api, extraOptions);
         } else {
-            console.log("[baseQuery] Refresh failed ❌ — logging out");
+            console.log("[baseQuery] Refresh failed  — logging out");
 
-            // 🔴 Clear Redux state and persisted storage
+            //  Clear Redux state and persisted storage
             api.dispatch({ type: "auth/logout" });
             await persistor.purge();
         }

@@ -6,13 +6,14 @@ import { jsPDF } from "jspdf"
  * @param {Object} opts.booking  - Booking object (populated)
  * @param {Object} opts.payment  - Payment object
  */
+
 export function generateReceipt({ booking, payment }) {
     const doc = new jsPDF({ unit: "mm", format: "a4" })
     const W = 210
     const margin = 16
     let y = 0
 
-    // ── Header Brand Bar ────────────────────────────────────────────
+    //  Header Brand Bar 
     doc.setFillColor(37, 99, 235)
     doc.rect(0, 0, W, 30, "F")
 
@@ -34,27 +35,25 @@ export function generateReceipt({ booking, payment }) {
 
     y = 38
 
-    // ── Success Badge ────────────────────────────────────────────────
+    //  Success Badge 
     doc.setFillColor(236, 253, 245)
     doc.roundedRect(margin, y, W - margin * 2, 13, 3, 3, "F")
     doc.setTextColor(5, 150, 105)
     doc.setFontSize(10)
     doc.setFont("helvetica", "bold")
-    doc.text("✓  Payment Successful", W / 2, y + 8.5, { align: "center" })
+    doc.text("  Payment Successful", W / 2, y + 8.5, { align: "center" })
 
     y += 20
 
-    // ── Two Column Info Cards ─────────────────────────────────────────
+    //  Two Column Info Cards 
     const colW = (W - margin * 2 - 5) / 2
     const cardH = 38
 
-    // helper: truncate long text for PDF
     const trunc = (str, max = 28) => {
         if (!str) return "N/A"
         return str.length > max ? str.slice(0, max - 1) + "…" : str
     }
 
-    // LEFT: Booking Details
     doc.setFillColor(248, 250, 252)
     doc.roundedRect(margin, y, colW, cardH, 2, 2, "F")
     doc.setDrawColor(226, 232, 240)
@@ -85,7 +84,6 @@ export function generateReceipt({ booking, payment }) {
         margin + 4, y + 32
     )
 
-    // RIGHT: Payment Info
     const rx = margin + colW + 5
     doc.setFillColor(248, 250, 252)
     doc.roundedRect(rx, y, colW, cardH, 2, 2, "F")
@@ -119,13 +117,13 @@ export function generateReceipt({ booking, payment }) {
 
     y += cardH + 7
 
-    // ── Service Information ───────────────────────────────────────────
+    //  Service Information 
     // Each field on its own row to avoid overlap
     const serviceRows = [
-        ["Service",  booking?.service?.serviceName  || "N/A"],
+        ["Service", booking?.service?.serviceName || "N/A"],
         ["Provider", booking?.provider?.businessName || "N/A"],
-        ["Location", booking?.location               || "N/A"],
-        ["Time",     booking?.serviceTime            || "N/A"],
+        ["Location", booking?.location || "N/A"],
+        ["Time", booking?.serviceTime || "N/A"],
     ]
     const svcCardH = 10 + serviceRows.length * 9
 
@@ -154,16 +152,16 @@ export function generateReceipt({ booking, payment }) {
 
     y += svcCardH + 7
 
-    // ── Amount Breakdown ──────────────────────────────────────────────
+    //  Amount Breakdown 
     const totalAmt = payment?.amount || 0
-    const commAmt  = payment?.adminAmount || 0
-    const provAmt  = payment?.providerAmount || 0
-    const commPct  = payment?.platformCommissionPct || 10
+    const commAmt = payment?.adminAmount || 0
+    const provAmt = payment?.providerAmount || 0
+    const commPct = payment?.platformCommissionPct || 10
 
     const amtRows = [
-        ["Service Amount",              `Rs. ${totalAmt.toLocaleString("en-IN")}`],
-        [`Platform Fee (${commPct}%)`,  `Rs. ${commAmt.toLocaleString("en-IN")}`],
-        ["Provider Receives",           `Rs. ${provAmt.toLocaleString("en-IN")}`],
+        ["Service Amount", `Rs. ${totalAmt.toLocaleString("en-IN")}`],
+        [`Platform Fee (${commPct}%)`, `Rs. ${commAmt.toLocaleString("en-IN")}`],
+        ["Provider Receives", `Rs. ${provAmt.toLocaleString("en-IN")}`],
     ]
     const amtCardH = 10 + amtRows.length * 9 + 3
 
@@ -190,7 +188,6 @@ export function generateReceipt({ booking, payment }) {
         }
     })
 
-    // Total Row
     y += amtCardH + 5
     doc.setFillColor(37, 99, 235)
     doc.roundedRect(margin, y, W - margin * 2, 13, 2, 2, "F")
@@ -202,14 +199,14 @@ export function generateReceipt({ booking, payment }) {
 
     y += 20
 
-    // ── Footer ────────────────────────────────────────────────────────
+    //  Footer
     doc.setTextColor(148, 163, 184)
     doc.setFontSize(7.5)
     doc.setFont("helvetica", "normal")
     doc.text("Thank you for choosing UrbanServe!", W / 2, y, { align: "center" })
     doc.text("support@urbanserve.in  |  www.urbanserve.in", W / 2, y + 6, { align: "center" })
 
-    // ── Save ──────────────────────────────────────────────────────────
+    // Save
     const filename = `UrbanServe_Receipt_${booking?._id?.toString()?.slice(-8) || "booking"}.pdf`
     doc.save(filename)
 }

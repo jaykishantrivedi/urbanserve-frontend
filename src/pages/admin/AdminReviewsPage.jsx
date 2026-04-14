@@ -19,13 +19,11 @@ export function AdminReviewsPage() {
     const [page, setPage] = useState(1)
     const [loadingId, setLoadingId] = useState(null)
 
-    // Debounce search
     useEffect(() => {
         const t = setTimeout(() => setDebounced(searchQuery), 400)
         return () => clearTimeout(t)
     }, [searchQuery])
 
-    // Reset pagination on filter change
     useEffect(() => { setPage(1) }, [debouncedSearch, ratingFilter])
 
     const { data, isLoading, isFetching } = useGetAdminReviewsQuery({

@@ -62,7 +62,7 @@ export default function PaymentPage() {
                         }).unwrap();
                         setPaidPayment(result.payment);
                         setShowReviewPrompt(true);
-                        toast.success('Payment successful! 🎉');
+                        toast.success('Payment successful! ');
                     } catch (err) {
                         toast.error(err?.data?.message || 'Payment verification failed');
                     }
@@ -110,7 +110,6 @@ export default function PaymentPage() {
     const estimatedAdmin = Math.round((amount * commissionPct) / 100);
     const estimatedProvider = amount - estimatedAdmin;
 
-    // SUCCESS STATE
     if (showReviewPrompt) {
         return (
             <PaymentSuccessState
@@ -151,7 +150,7 @@ export default function PaymentPage() {
                 />
 
                 <p className="text-center text-xs text-gray-400 mt-6">
-                    🔒 Secured by UrbanServe · SSL Encrypted
+                     Secured by UrbanServe · SSL Encrypted
                 </p>
             </div>
         </div>

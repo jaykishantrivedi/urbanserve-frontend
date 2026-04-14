@@ -1,7 +1,7 @@
 export default function UserRequestsLoadingState() {
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-16">
-            <span className="animate-spin text-4xl text-blue-500">🌀</span>
+            <span className="animate-spin text-4xl text-blue-500"></span>
         </div>
     );
 }

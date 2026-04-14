@@ -28,7 +28,6 @@ export default function InlineOtpChange({
       await onSendOtp(type === 'phone' ? { phone: newValue } : { email: newValue });
       setStep('enterOtp');
     } catch {
-      // Toast is handled in parent.
     }
   };
 
@@ -44,7 +43,6 @@ export default function InlineOtpChange({
       setNewValue('');
       setOtp('');
     } catch {
-      // Toast is handled in parent.
     }
   };
 
@@ -75,7 +73,7 @@ export default function InlineOtpChange({
             Change
           </button>
         </div>
-        {isVerified && <p className="text-xs text-green-600 flex items-center gap-1 ml-1">✅ Verified</p>}
+        {isVerified && <p className="text-xs text-green-600 flex items-center gap-1 ml-1"> Verified</p>}
         {!isVerified && currentValue && <p className="text-xs text-amber-600 ml-1">Not yet verified</p>}
       </div>
     );

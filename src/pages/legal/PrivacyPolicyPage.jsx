@@ -2,23 +2,23 @@ import { useState, useEffect, useRef } from "react"
 import { Shield, Mail, ChevronUp } from "lucide-react"
 
 const sections = [
-  { id: "introduction",        title: "Introduction",                  number: "1" },
-  { id: "information-we-collect", title: "Information We Collect",    number: "2" },
-  { id: "how-we-use",          title: "How We Use Your Information",   number: "3" },
-  { id: "sharing",             title: "Sharing of Information",        number: "4" },
-  { id: "data-security",       title: "Data Security",                 number: "5" },
-  { id: "cookies",             title: "Cookies & Tracking",            number: "6" },
-  { id: "user-rights",         title: "User Rights",                   number: "7" },
-  { id: "data-retention",      title: "Data Retention",                number: "8" },
-  { id: "third-party",         title: "Third-Party Services",          number: "9" },
-  { id: "children",            title: "Children's Privacy",            number: "10" },
-  { id: "international",       title: "International Data Transfers",  number: "11" },
-  { id: "changes",             title: "Changes to This Policy",        number: "12" },
-  { id: "liability",           title: "Limitation of Liability",       number: "13" },
-  { id: "contact",             title: "Contact Us",                    number: "14" },
+  { id: "introduction", title: "Introduction", number: "1" },
+  { id: "information-we-collect", title: "Information We Collect", number: "2" },
+  { id: "how-we-use", title: "How We Use Your Information", number: "3" },
+  { id: "sharing", title: "Sharing of Information", number: "4" },
+  { id: "data-security", title: "Data Security", number: "5" },
+  { id: "cookies", title: "Cookies & Tracking", number: "6" },
+  { id: "user-rights", title: "User Rights", number: "7" },
+  { id: "data-retention", title: "Data Retention", number: "8" },
+  { id: "third-party", title: "Third-Party Services", number: "9" },
+  { id: "children", title: "Children's Privacy", number: "10" },
+  { id: "international", title: "International Data Transfers", number: "11" },
+  { id: "changes", title: "Changes to This Policy", number: "12" },
+  { id: "liability", title: "Limitation of Liability", number: "13" },
+  { id: "contact", title: "Contact Us", number: "14" },
 ]
 
-// ─── Sub-components ──────────────────────────────────────────────────────────
+//  Sub-components 
 const Section = ({ id, title, children }) => (
   <section id={id} className="scroll-mt-28">
     <h2 className="text-xl font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100">{title}</h2>
@@ -45,19 +45,18 @@ const BulletList = ({ items }) => (
 )
 
 const Callout = ({ children, variant = "info" }) => (
-  <div className={`mt-4 rounded-xl px-5 py-4 text-sm border ${
-    variant === "warning"
+  <div className={`mt-4 rounded-xl px-5 py-4 text-sm border ${variant === "warning"
       ? "bg-red-50 border-red-100 text-gray-800"
       : "bg-indigo-50 border-indigo-100 text-gray-800"
-  }`}>
+    }`}>
     {children}
   </div>
 )
 
-// ─── Page ────────────────────────────────────────────────────────────────────
+//  Page 
 export default function PrivacyPolicyPage() {
   const [activeSection, setActiveSection] = useState("introduction")
-  const [showScrollTop, setShowScrollTop]   = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false)
   const contentRef = useRef(null)
 
   useEffect(() => {
@@ -108,11 +107,10 @@ export default function PrivacyPolicyPage() {
                 <li key={s.id}>
                   <button
                     onClick={() => scrollTo(s.id)}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
-                      activeSection === s.id
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 ${activeSection === s.id
                         ? "bg-indigo-50 text-indigo-700 font-medium"
                         : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"
-                    }`}
+                      }`}
                   >
                     <span className="text-xs opacity-50 mr-2">{s.number}.</span>
                     {s.title}

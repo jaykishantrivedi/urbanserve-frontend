@@ -20,7 +20,6 @@ import { paymentApi } from "./paymentApi";
 import { reviewApi } from "./reviewApi";
 import { adminDashboardApi } from "./adminDashboardApi";
 
-// Combine reducers
 const rootReducer = combineReducers({
     auth: authReducer,
     city: cityReducer,
@@ -41,17 +40,14 @@ const rootReducer = combineReducers({
     [adminDashboardApi.reducerPath]: adminDashboardApi.reducer,
 });
 
-// Persist auth and city slices
 const persistConfig = {
     key: "root",
     storage,
     whitelist: ["auth", "city"],
 };
 
-// Wrap combined reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Configure store
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>

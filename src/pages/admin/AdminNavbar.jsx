@@ -26,7 +26,7 @@ export function AdminNavbar({ isSidebarOpen, onToggleSidebar }) {
     const adminEmail = userData?.user?.email || "admin@urbanserve.com"
     const initials   = adminName.slice(0, 2).toUpperCase()
 
-    // ── Alerts ──────────────────────────────────────────────────────────
+    //  Alerts 
     const { data: alertData, refetch } = useGetAdminAlertsQuery(undefined, {
         pollingInterval: 30000
     })
@@ -36,7 +36,7 @@ export function AdminNavbar({ isSidebarOpen, onToggleSidebar }) {
     const alerts      = alertData?.alerts      || []
     const unreadCount = alertData?.unreadCount || 0
 
-    // ── Close dropdowns on outside click ───────────────────────────────
+    //  Close dropdowns on outside click 
     useEffect(() => {
         const handler = (e) => {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target))

@@ -9,7 +9,7 @@ import SearchResultsTopSection from './searchResults/SearchResultsTopSection'
 import SearchResultsResultsSection from './searchResults/SearchResultsResultsSection'
 import SearchResultsEnquiryModal from './searchResults/SearchResultsEnquiryModal'
 
-// ── Debounce ───────────────────────────────────────────────────────
+//  Debounce 
 const useDebounce = (value, delay = 300) => {
   const [debounced, setDebounced] = useState(value)
   useEffect(() => {
@@ -19,7 +19,7 @@ const useDebounce = (value, delay = 300) => {
   return debounced
 }
 
-// ── SearchResultsPage ──────────────────────────────────────────────
+//  SearchResultsPage 
 const SearchResultsPage = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -27,7 +27,6 @@ const SearchResultsPage = () => {
 
   const selectedCity = useSelector((state) => state.city.selectedCity)
 
-  // Read initial values from URL
   const initService = searchParams.get('service') || ''
   const initCity    = searchParams.get('city') || selectedCity
 
@@ -36,7 +35,6 @@ const SearchResultsPage = () => {
   const [showServices, setShowServices] = useState(false)
   const [showCities, setShowCities]     = useState(false)
 
-  // Sync if URL changes externally
   useEffect(() => {
     setServiceInput(searchParams.get('service') || '')
     setCityInput(searchParams.get('city') || selectedCity)
@@ -53,7 +51,7 @@ const SearchResultsPage = () => {
   const citySuggestions       = cityData?.cities || []
   const serviceSuggestions    = svcData?.service || []
 
-  // ── Filters ────────────────────────────────────────────────────
+  //  Filters 
   const [showFilters, setShowFilters] = useState(false)
   const [sortParam, setSortParam]     = useState('recommended')
   const blank = { minPrice: '', maxPrice: '', priceType: '', minRating: '', experience: '' }
@@ -64,7 +62,7 @@ const SearchResultsPage = () => {
   const resetFilters  = () => { setFilters(blank); setActiveFilters(blank); setShowFilters(false) }
   const removeFilter  = (key) => { const f = { ...activeFilters, [key]: '' }; setActiveFilters(f); setFilters(f) }
 
-  // ── Current search query (from URL params) ─────────────────────
+  //  Current search query (from URL params) 
   const queryService = searchParams.get('service') || ''
   const queryCity    = searchParams.get('city') || ''
 
@@ -74,7 +72,7 @@ const SearchResultsPage = () => {
   )
   const results = data?.results || []
 
-  // ── Enquiry modal ──────────────────────────────────────────────
+  //  Enquiry modal 
   const [selectedProvider, setSelectedProvider] = useState(null)
   const [enquiryForm, setEnquiryForm] = useState({
     location: queryCity || selectedCity || '',
@@ -109,7 +107,7 @@ const SearchResultsPage = () => {
     }
   }
 
-  // ── Search submit ──────────────────────────────────────────────
+  //  Search submit 
   const handleSearch = (e) => {
     e.preventDefault()
     const p = {}
@@ -121,7 +119,6 @@ const SearchResultsPage = () => {
     setSearchParams(p)
   }
 
-  // Close dropdowns on outside click
   useEffect(() => {
     const h = (e) => {
       if (serviceRef.current && !serviceRef.current.contains(e.target)) setShowServices(false)

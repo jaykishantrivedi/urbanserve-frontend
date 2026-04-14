@@ -65,8 +65,7 @@ export default function PendingProvidersTable({
               {["Name", "Email", "Phone", "Location", "Experience", "Status", "Actions"].map((col) => (
                 <th
                   key={col}
-                  className={`px-4 py-3.5 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider ${
-                    col === "Email"
+                  className={`px-4 py-3.5 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider ${col === "Email"
                       ? "hidden md:table-cell"
                       : col === "Phone"
                         ? "hidden lg:table-cell"
@@ -75,7 +74,7 @@ export default function PendingProvidersTable({
                           : col === "Location"
                             ? "hidden sm:table-cell"
                             : ""
-                  }`}
+                    }`}
                 >
                   {col}
                 </th>
@@ -99,9 +98,8 @@ export default function PendingProvidersTable({
               paginated.map((provider) => (
                 <tr
                   key={provider._id}
-                  className={`border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors ${
-                    isFetching ? "opacity-60" : ""
-                  }`}
+                  className={`border-b border-gray-50 last:border-0 hover:bg-gray-50/60 transition-colors ${isFetching ? "opacity-60" : ""
+                    }`}
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">

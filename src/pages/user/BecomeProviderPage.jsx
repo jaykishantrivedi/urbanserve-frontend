@@ -90,7 +90,6 @@ export default function BecomeProviderPage() {
   }
 
   const handleNext = () => {
-    // Basic validation
     let errors = {}
     if (step === 1) {
       if (!formData.businessName) errors.businessName = "Business Name is required."
@@ -111,7 +110,6 @@ export default function BecomeProviderPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // Final validation
     if (formData.documents.length === 0) {
       setFormErrors({ documents: "Please add at least one document (ID proof or certificate)." })
       return
