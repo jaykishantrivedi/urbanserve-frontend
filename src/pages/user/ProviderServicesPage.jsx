@@ -14,6 +14,7 @@ import { useSearchCitiesQuery, useSearchProvidersQuery } from '../../redux/searc
 import {
   useCreateServiceRequestMutation,
   useSendRequestToProvidersMutation,
+  useGetUserRequestsQuery,
 } from '../../redux/serviceRequestApi'
 import { setCity } from '../../redux/citySlice'
 import ServiceRequestModal from '../../components/user/ServiceRequestModal'
@@ -74,6 +75,7 @@ const ProviderServicesPage = () => {
 
   const [createRequest, { isLoading: isCreating }] = useCreateServiceRequestMutation()
   const [sendToProvider, { isLoading: isSending }] = useSendRequestToProvidersMutation()
+  const { data: userRequestsData } = useGetUserRequestsQuery()
 
   const cityRef = useRef(null)
   const serviceRef = useRef(null)
@@ -197,13 +199,27 @@ const ProviderServicesPage = () => {
     if (!selectedProvider) return
 
     try {
-      const createResponse = await createRequest({
-        service: selectedProvider.service._id,
-        ...enquiryForm,
-      }).unwrap()
+      const serviceId = selectedProvider.service._id
+
+      // Reuse an existing open request for the same service if one exists
+      const existingRequest = userRequestsData?.requests?.find(
+        (r) => r.service?._id === serviceId && r.status === 'open'
+      )
+
+      let requestId
+
+      if (existingRequest) {
+        requestId = existingRequest._id
+      } else {
+        const createResponse = await createRequest({
+          service: serviceId,
+          ...enquiryForm,
+        }).unwrap()
+        requestId = createResponse.serviceRequest._id
+      }
 
       await sendToProvider({
-        requestId: createResponse.serviceRequest._id,
+        requestId,
         providerId: selectedProvider.provider._id,
       }).unwrap()
 

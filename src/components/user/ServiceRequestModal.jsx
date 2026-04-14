@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Calendar, MapPin, Clock, MessageSquare, Briefcase } from 'lucide-react';
-import { useCreateServiceRequestMutation, useSendRequestToProvidersMutation } from '../../redux/serviceRequestApi';
+import { useCreateServiceRequestMutation, useSendRequestToProvidersMutation, useGetUserRequestsQuery } from '../../redux/serviceRequestApi';
 import Button from '../ui/Button';
 import { toast } from 'react-toastify';
 
@@ -8,6 +8,7 @@ const ServiceRequestModal = ({ isOpen, onClose, serviceId, providerId = null, se
     
     const [createRequest, { isLoading: isCreating }] = useCreateServiceRequestMutation();
     const [sendToProviders, { isLoading: isSending }] = useSendRequestToProvidersMutation();
+    const { data: userRequestsData } = useGetUserRequestsQuery();
 
     const [formData, setFormData] = useState({
         location: '',
@@ -26,12 +27,23 @@ const ServiceRequestModal = ({ isOpen, onClose, serviceId, providerId = null, se
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const reqRes = await createRequest({
-                service: serviceId,
-                ...formData
-            }).unwrap();
+            // Reuse an existing open request for the same service if one exists
+            const existingRequest = userRequestsData?.requests?.find(
+                (r) => r.service?._id === serviceId && r.status === 'open'
+            );
 
-            const requestId = reqRes.serviceRequest._id;
+            let requestId;
+
+            if (existingRequest) {
+                requestId = existingRequest._id;
+            } else {
+                const reqRes = await createRequest({
+                    service: serviceId,
+                    ...formData
+                }).unwrap();
+                requestId = reqRes.serviceRequest._id;
+            }
+
             await sendToProviders({ requestId, providerId }).unwrap();
 
             toast.success(providerId ? "Enquiry successfully sent to this provider!" : "Enquiry successfully broadcasted to nearby providers!");
