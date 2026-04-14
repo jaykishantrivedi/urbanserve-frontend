@@ -7,10 +7,9 @@ import { persistor } from "../redux/store"
 const REFRESH_INTERVAL_MS = 13 * 60 * 1000  // 13 minutes
 
 // Tab-focus refresh only fires if the token hasn't been refreshed in the last 5 minutes.
-// This prevents hammering the server every time you switch editor ↔ browser tabs.
 const TAB_FOCUS_COOLDOWN_MS = 5 * 60 * 1000  // 5 minutes
 
-const BASE_URL = "http://localhost:8080/api"
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8080/api"
 
 const useTokenRefresh = () => {
     const dispatch = useDispatch()
@@ -36,16 +35,13 @@ const useTokenRefresh = () => {
 
             if (!response.ok) {
                 // Refresh token is expired or invalid → log the user out
-                console.warn("[TokenRefresh] Refresh failed — logging out")
                 dispatch(logout())
                 await persistor.purge()
             } else {
                 lastRefreshedAtRef.current = Date.now()
-                console.log("[TokenRefresh] Access token refreshed ")
             }
         } catch (err) {
-            console.error("[TokenRefresh] Network error during refresh:", err)
-            // Don't force logout on network errors — user may just be offline briefly
+            console.error("Error during refresh:", err)
         } finally {
             isRefreshingRef.current = false
         }
@@ -87,7 +83,6 @@ const useTokenRefresh = () => {
                 // This prevents unnecessary requests when quickly switching tabs.
                 if (timeSinceLastRefresh < TAB_FOCUS_COOLDOWN_MS) return
 
-                console.log("[TokenRefresh] Tab focused — refreshing token...")
                 refreshToken()
             }
         }
