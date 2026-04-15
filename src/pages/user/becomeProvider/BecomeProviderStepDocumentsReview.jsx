@@ -176,7 +176,7 @@ export default function BecomeProviderStepDocumentsReview({
             className="mt-0.5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
           />
           <span className="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors">
-            I agree to LocalEase's{" "}
+            I agree to UrbanServe's{" "}
             <Link to="/terms" target="_blank" className="text-indigo-600 hover:underline">
               Terms of Service
             </Link>{" "}
